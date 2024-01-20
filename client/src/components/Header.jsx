@@ -5,10 +5,10 @@ import { FaMoon } from "react-icons/fa";
 const Header = () => {
     const path = useLocation().pathname
   return (
-    <Navbar className=" font-mono border-b">
+    <Navbar className=" font-mono border-b border-sky-100">
       <Link
         to="/"
-        className="self-center Whitespace-nowrap  text-sm md:text-lg font-semibold dark:text-white text-emerald-800 uppercase rounded-full border-r-4 border-t-2 border-l-4 border-sky-600  px-2"
+        className="self-center Whitespace-nowrap  text-sm md:text-lg font-semibold dark:text-white text-emerald-800 uppercase rounded  border-sky-600  p-1"
       >
         <span className="py-1 text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-600 font-bold">
           everyday
