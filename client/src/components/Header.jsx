@@ -15,6 +15,11 @@ const Header = () => {
         </span>
         SAMIR
       </Link>
+      
+      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
+        <IoIosSearch />
+      </Button>
+      <div className="flex md:order-2 gap-2">
       <form>
         <TextInput
           type="text"
@@ -23,10 +28,6 @@ const Header = () => {
           className="hidden lg:inline"
         />
       </form>
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
-        <IoIosSearch />
-      </Button>
-      <div className="flex md:order-2 gap-2">
         <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
           <FaMoon />
         </Button>
@@ -34,6 +35,7 @@ const Header = () => {
           <Button  outline>Sign in</Button>
         </Link>
        <Navbar.Toggle/>
+       
       </div>
       <Navbar.Collapse>
           <Navbar.Link  className="font-semibold" active={path === '/'} as={'div'}>
