@@ -37,7 +37,7 @@ const SignUp = () => {
     setLoading(false)
  }
     return (
-    <div className="min-h-screen max-w-6xl mx-auto mt-5 md:mt-20 font-mono">
+    <div className=" max-w-6xl mx-auto mt-5 mb-20 md:mt-20 font-mono">
       <div className="flex flex-col-reverse md:flex-row md:items-center justify-between p-3 ">
         {/* left */}
         <div className="flex-1 ">
