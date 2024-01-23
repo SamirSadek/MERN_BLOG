@@ -1,13 +1,16 @@
 
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
 
 const SignIn = () => {
     const [formData, setFormData] = useState({})
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
+   
+    const {loading, error} = useSelector(state => state.user)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     
     const handleChange = e =>{
         setFormData({...formData, [e.target.id] : e.target.value.trim()})
@@ -15,11 +18,10 @@ const SignIn = () => {
  const handleSubmit = async(e) =>{
     e.preventDefault()
     if( !formData.email || !formData.password){
-        return setError('All fields is required')
+        return dispatch(signInFailure('Please fill out all the fields'))
     }
     try {
-        setLoading(true)
-        setError(null)
+        dispatch(signInStart())
         const res = await fetch('/api/auth/signin', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
@@ -27,22 +29,24 @@ const SignIn = () => {
         })
         const data = await res.json()
         if(data.success === false){
-            return setError(data.message)
+           dispatch(signInFailure(data.message))
         }
-        setLoading(false)
-        navigate('/')
-    } catch (error) {
-        setError(error.message)
+        if (res.ok){
+          dispatch(signInSuccess(data))
+          navigate('/')
+
+        }
+      } catch (error) {
+        dispatch(signInFailure(error.message))
        
     }
-    setLoading(false)
  }
     return (
     <div className=" max-w-6xl mx-auto mt-5 mb-20 md:mt-20 font-mono">
       <div className="flex flex-col-reverse md:flex-row md:items-center justify-between p-3 ">
         {/* left */}
         <div className="flex-1 ">
-          <form className="space-y-2 flex flex-col justify-center" onClick={handleSubmit}>
+          <form className="space-y-2 flex flex-col justify-center" onSubmit={handleSubmit}>
             
             <div>
               <Label value=" Email" />
@@ -52,7 +56,7 @@ const SignIn = () => {
               <Label value=" Password" />
               <TextInput type="password" placeholder="Type Your Password ..." id="password" onChange={handleChange}/>
             </div>
-            <Button gradientDuoTone='greenToBlue' className="font-bold " disabled={loading}>
+            <Button type="submit" gradientDuoTone='greenToBlue' className="font-bold " disabled={loading}>
                 {
                     loading ? <div><Spinner size='sm'/> <span>loading...</span></div> : 'Sign in'
                 }
