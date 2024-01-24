@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
     const [formData, setFormData] = useState({})
@@ -46,7 +47,7 @@ const SignIn = () => {
       <div className="flex flex-col-reverse md:flex-row md:items-center justify-between p-3 ">
         {/* left */}
         <div className="flex-1 ">
-          <form className="space-y-2 flex flex-col justify-center" onSubmit={handleSubmit}>
+          <form className="space-y-4 flex flex-col justify-center" onSubmit={handleSubmit}>
             
             <div>
               <Label value=" Email" />
@@ -56,11 +57,12 @@ const SignIn = () => {
               <Label value=" Password" />
               <TextInput type="password" placeholder="Type Your Password ..." id="password" onChange={handleChange}/>
             </div>
-            <Button type="submit" gradientDuoTone='greenToBlue' className="font-bold " disabled={loading}>
+            <Button type="submit" gradientDuoTone='greenToBlue' className="font-bold" disabled={loading}>
                 {
                     loading ? <div><Spinner size='sm'/> <span>loading...</span></div> : 'Sign in'
                 }
             </Button>
+            <OAuth/>
           </form>
           {
                 error && (
