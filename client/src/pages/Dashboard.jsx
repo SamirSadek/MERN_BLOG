@@ -14,13 +14,13 @@ const Dashboard = () => {
         }
     },[location.search])
     return (
-        <div className="min-h-screen flex flex-col md:flex-row">
+        <div className="min-h-screen flex flex-col md:flex-row font-mono">
             <div className='md:w-56'>
                 <DashboardSidebar/>
             </div>
             
                 {
-                    tab === 'profile'  && <div><DashboardProfile/></div>
+                    tab === 'profile'  && <div className="w-full"><DashboardProfile/></div>
                 }
             
         </div>
